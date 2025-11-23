@@ -15,7 +15,10 @@
 Настроите сети офисов так, чтобы не возникало broadcast штормов, а использование линков было максимально оптимизировано
 Используете IPv4. IPv6 по желанию
 
-## 1. Адресация
+## 1.Топология
+![Топология](https://github.com/oreshinog/OTUSProf/blob/main/Labs/Lab01/Img/img00.png)
+
+## 2. Адресация
 
 |Объект|Устройство|Порт|IP-адрес|Маска подсети|
 |--|--|--|--|--|
@@ -62,7 +65,7 @@
 |С.-Петербург|R18|e0/1|172.16.0.81|255.255.255.252
 |С.-Петербург|R17|e0/1|172.16.0.82|255.255.255.252
 |С.-Петербург|R18|e0/0|172.16.0.85|255.255.255.252
-|С.-Петербург|R16|e0/0|172.16.0.86|255.255.255.252
+|С.-Петербург|R16|e0/1|172.16.0.86|255.255.255.252
 |С.-Петербург|R16|e0/3|172.16.0.89|255.255.255.252
 |С.-Петербург|R32|e0/0|172.16.0.90|255.255.255.252
 |Москва|R12|e0/0|172.16.0.93|255.255.255.252
@@ -73,14 +76,16 @@
 |Москва|SW4|e1/1|172.16.0.102|255.255.255.252
 |Москва|R13|e0/0|172.16.0.105|255.255.255.252
 |Москва|SW5|e1/0|172.16.0.106|255.255.255.252
-|Москва|SW5|vlanif2|10.0.0.253|255.255.255.0
 |Москва|SW4|vlanif2|10.0.0.252|255.255.255.0
-|Москва|SW4|VRRP-vlan2-id102|10.0.0.254|255.255.255.255
-|Москва|SW5|VRRP-vlan2-id102|10.0.0.254|255.255.255.255
-|Москва|SW4|VRRP-vlan3-id103|10.0.1.254|255.255.255.255
-|Москва|SW5|VRRP-vlan3-id103|10.0.1.254|255.255.255.255
-|Москва|SW3|vlanif2|10.0.0.251|255.255.255.0
-|Москва|SW2|vlanif2|10.0.0.250|255.255.255.0
+|Москва|SW5|vlanif2|10.0.0.253|255.255.255.0
+|Москва|SW4|vlanif3|10.0.1.252|255.255.255.0
+|Москва|SW5|vlanif3|10.0.1.253|255.255.255.0
+|Москва|SW4|vlanif3-VRRP|10.0.1.254|255.255.255.255
+|Москва|SW5|vlanif3-VRRP|10.0.1.254|255.255.255.255
+|Москва|SW4|vlanif2-VRRP|10.0.0.254|255.255.255.255
+|Москва|SW5|vlanif2-VRRP|10.0.0.254|255.255.255.255
+|Москва|SW3|vlanif2|10.0.0.249|255.255.255.0
+|Москва|SW2|vlanif2|10.0.0.248|255.255.255.0
 |С.-Петербург|R17|e0/0|172.16.0.109|255.255.255.252
 |С.-Петербург|SW9|e0/3|172.16.0.110|255.255.255.252
 |С.-Петербург|R17|e0/2|172.16.0.113|255.255.255.252
@@ -89,406 +94,457 @@
 |С.-Петербург|SW9|e1/0|172.16.0.118|255.255.255.252
 |С.-Петербург|R16|e0/0|172.16.0.121|255.255.255.252
 |С.-Петербург|SW10|e0/3|172.16.0.122|255.255.255.252
-|С.-Петербург|SW10|vlanif2|10.1.0.253|255.255.255.0
-|С.-Петербург|SW9|vlanif2|10.1.0.252|255.255.255.0
-|С.-Петербург|SW10|VRRP-vlan2-id102|10.1.0.254|255.255.255.255
-|С.-Петербург|SW9|VRRP-vlan2-id102|10.1.0.254|255.255.255.255
-|С.-Петербург|SW10|VRRP-vlan3-id103|10.1.1.254|255.255.255.255
-|С.-Петербург|SW9|VRRP-vlan3-id103|10.1.1.254|255.255.255.255
-|Чокурдах|R28|e0/2|172.16.0.125|255.255.255.252
-|Чокурдах|SW29|e0/2|172.16.0.126|255.255.255.252
-|Чокурдах|SW29|vlanif2|10.2.0.254|255.255.255.0
-|Чокурдах|SW29|vlanif3|10.2.1.254|255.255.255.0
+|С.-Петербург|SW10|vlanif2|10.6.0.252|255.255.255.0
+|С.-Петербург|SW9|vlanif2|10.6.0.253|255.255.255.0
+|С.-Петербург|SW9|vlanif2-VRRP|10.6.0.254|255.255.255.255
+|С.-Петербург|SW10|vlanif2-VRRP|10.6.0.254|255.255.255.255
+|С.-Петербург|SW9|vlanif3-VRRP|10.6.1.254|255.255.255.255
+|С.-Петербург|SW10|vlanif3-VRRP|10.6.1.254|255.255.255.255
+|Чокурдах|R28|e0/2.2|10.5.0.254|255.255.255.0
+|Чокурдах|R28|e0/2.3|10.5.1.254|255.255.255.0
+|Чокурдах|SW29|vlanif2|10.5.0.253|255.255.255.0
 
-
-
+###Адреса клиентов
 |Объект|Устройство|Порт|IP-адрес|Маска подсети|Шлюз|
 |--|--|--|--|--|--|
 |Москва|VPC1|eth0(vlan3)|10.0.1.1|255.255.255.0|10.0.1.254|
 |Москва|VPC7|eth0(vlan3)|10.0.1.2|255.255.255.0|10.0.1.254|
-|С.-Петербург|VPC8|eth0(vlan3)|10.1.1.1|255.255.255.0|10.1.1.254|
-|С.-Петербург|VPC|eth0(vlan3)|10.1.1.2|255.255.255.0|10.1.1.254|
-|Чокурдах|VPC30|eth0(vlan3)|10.2.1.1|255.255.255.0|10.2.1.254|
-|Чокурдах|VPC31|eth0(vlan3)|10.2.1.2|255.255.255.0|10.2.1.254|
+|С.-Петербург|VPC8|eth0(vlan3)|10.6.1.1|255.255.255.0|10.1.1.254|
+|С.-Петербург|VPC|eth0(vlan3)|10.6.1.2|255.255.255.0|10.1.1.254|
+|Чокурдах|VPC30|eth0(vlan3)|10.5.1.1|255.255.255.0|10.2.1.254|
+|Чокурдах|VPC31|eth0(vlan3)|10.5.1.2|255.255.255.0|10.2.1.254|
 
+###Loopback адреса
+|Объект|Устройство|IP-адрес|Маска подсети
+|--|--|--|--|
+|Москва|R14|10.254.0.1|255.255.0.0
+|Москва|R15|10.254.0.2|255.255.0.0
+|Москва|R12|10.254.0.3|255.255.0.0
+|Москва|R13|10.254.0.4|255.255.0.0
+|Москва|R19|10.254.0.5|255.255.0.0
+|Москва|R20|10.254.0.6|255.255.0.0
+|Москва|SW4|10.254.0.7|255.255.0.0
+|Москва|SW5|10.254.0.8|255.255.0.0
+|Киторн|R22|10.254.1.1|255.255.0.0
+|Ламас|R22|10.254.2.1|255.255.0.0
+|Триада|R23|10.254.3.1|255.255.0.0
+|Триада|R24|10.254.3.2|255.255.0.0
+|Триада|R25|10.254.3.3|255.255.0.0
+|Триада|R26|10.254.3.4|255.255.0.0
+|Лабытнанги|R27|10.254.4.1|255.255.0.0
+|Чокурдах|R28|10.254.5.1|255.255.0.0
+|С.-Петербург|R18|10.254.6.1|255.255.0.0
+|С.-Петербург|R17|10.254.6.2|255.255.0.0
+|С.-Петербург|R16|10.254.6.3|255.255.0.0
+|С.-Петербург|R32|10.254.6.4|255.255.0.0
+|С.-Петербург|SW9|10.254.6.5|255.255.0.0
+|С.-Петербург|SW10|10.254.6.6|255.255.0.0
 
-## Шаг 2.Топология
-![Сеть](https://github.com/oreshinog/OTUS/blob/main/Labs/Lab02/Img/img01.png)
+## Типовая настройка оборудования
 
-
-### Шаг 1.2.Настройте узлы ПК.
-![ПК1Сеть](https://github.com/oreshinog/OTUS/blob/main/Labs/Lab02/Img/img02.png)
-![ПК2Сеть](https://github.com/oreshinog/OTUS/blob/main/Labs/Lab02/Img/img03.png)
-### Шаг 1.3.Выполните инициализацию и перезагрузку коммутаторов, настройте базовые параметры каждого коммутатора.
-1.3.a.Настройте имена устройств в соответствии с топологией.
-1.3.b.Настройте IP-адреса, как указано в таблице адресации.
-1.3.c.Назначьте **cisco** в качестве паролей консоли и VTY.
-1.3.d.Назначьте **class** в качестве пароля доступа к привилегированному режиму EXEC.
-### S1
-```
-Switch>enable
-Switch#conf t
-Switch(config)#no ip domain-lookup
-Switch(config)#hostname S1
-S1(config)#service password-encryption
-S1(config)#enable secret class
-S1(config)#banner motd #
-Unauthorized access is strictly prohibited. #
-
-S1(config)#int vlan1
-S1(config-if)#ip add 192.168.1.11 255.255.255.0
-S1(config-if)#no shu
-S1(config-if)#exit
-
-S1(config)#line con 0
-S1(config-line)#pass cisco
-S1(config-line)#logging synchronous
-S1(config-line)#login
-S1(config-line)#exit
-S1(config)#line vty 0 4
-S1(config-line)#pass cisco
-S1(config-line)#exit
-S1(config)#line vty 5 15
-S1(config-line)#pass cisco
-S1(config-line)#exit
-
-S1(config)#exit
-S1#copy run start
-S1#reload
-```
-### S2
-```
-Switch>enable
-Switch#conf t
-Switch(config)#no ip domain-lookup
-Switch(config)#hostname S2
-S2(config)#service password-encryption
-S2(config)#enable secret class
-S2(config)#banner motd #
-Unauthorized access is strictly prohibited. #
-
-S2(config)#int vlan1
-S2(config-if)#ip add 192.168.1.12 255.255.255.0
-S2(config-if)#no shu
-S2(config-if)#exit
-
-S2(config)#line con 0
-S2(config-line)#pass cisco
-S2(config-line)#logging synchronous
-S2(config-line)#login
-S2(config-line)#exit
-S2(config)#line vty 0 4
-S2(config-line)#pass cisco
-S2(config-line)#exit
-S2(config)#line vty 5 15
-S2(config-line)#pass cisco
-S2(config-line)#exit
-
-S2(config)#exit
-S2#copy run start
-S2#reload
-```
-## Часть 2.Изучение таблицы МАС-адресов коммутатора
-### Шаг 2.1.Запишите МАС-адреса сетевых устройств.
-#### 2.1.a.Откройте командную строку на PC-A и PC-B и введите команду **ipconfig /all**.
-##### PC-A
-```
-C:\>ipconfig /all
-
-FastEthernet0 Connection:(default port)
-
-	Connection-specific DNS Suffix..:
-	Physical Address................: 00E0.8F6A.61AE
-	Link-local IPv6 Address.........: FE80::2E0:8FFF:FE6A:61AE
-	IPv6 Address....................: ::
-	IPv4 Address....................: 192.168.1.1
-	Subnet Mask.....................: 255.255.255.0
-	Default Gateway.................: ::
-									  0.0.0.0
-	DHCP Servers....................: 0.0.0.0
-	DHCPv6 IAID.....................:
-	DHCPv6 Client DUID..............: 00-01-00-01-BA-5D-A5-7D-00-E0-8F-6A-61-AE
-	DNS Servers.....................: ::
-								   	  0.0.0.0
-  
-Bluetooth Connection:
-
-	Connection-specific DNS Suffix..:
-	Physical Address................: 0001.96CE.6330
-	Link-local IPv6 Address.........: ::
-	IPv6 Address....................: ::
-	IPv4 Address....................: 0.0.0.0
-	Subnet Mask.....................: 0.0.0.0
-	Default Gateway.................: ::
-									  0.0.0.0
-	DHCP Servers....................: 0.0.0.0
-	DHCPv6 IAID.....................:
-	DHCPv6 Client DUID..............: 00-01-00-01-BA-5D-A5-7D-00-E0-8F-6A-61-AE
-	DNS Servers.....................: ::
-									  0.0.0.0
-```
-##### PC-B
-```
-C:\>ipconfig /all
-
-FastEthernet0 Connection:(default port)
-
-	Connection-specific DNS Suffix..:
-	Physical Address................: 0001.63BE.6E9A
-	Link-local IPv6 Address.........: FE80::201:63FF:FEBE:6E9A
-	IPv6 Address....................: ::
-	IPv4 Address....................: 192.168.1.2
-	Subnet Mask.....................: 255.255.255.0
-	Default Gateway.................: ::
-									  0.0.0.0
-	DHCP Servers....................: 0.0.0.0
-	DHCPv6 IAID.....................:
-	DHCPv6 Client DUID..............: 00-01-00-01-13-1C-D1-86-00-01-63-BE-6E-9A
-	DNS Servers.....................: ::
-									  0.0.0.0
-
-Bluetooth Connection:
-
-	Connection-specific DNS Suffix..:
-	Physical Address................: 0060.47AC.D15D
-	Link-local IPv6 Address.........: ::
-	IPv6 Address....................: ::
-	IPv4 Address....................: 0.0.0.0
-	Subnet Mask.....................: 0.0.0.0
-	Default Gateway.................: ::
-									  0.0.0.0
-	DHCP Servers....................: 0.0.0.0
-	DHCPv6 IAID.....................:
-	DHCPv6 Client DUID..............: 00-01-00-01-13-1C-D1-86-00-01-63-BE-6E-9A
-	DNS Servers.....................: ::
-									  0.0.0.0
-```
-#### Назовите физические адреса адаптера Ethernet.
-
-MAC-адрес компьютера PC-A: **00E0.8F6A.61AE**
-
-MAC-адрес компьютера PC-B: **0001.63BE.6E9A**
-
-
-#### 1.1.a.Подключитесь к коммутаторам S1 и S2 через консоль и введите команду **show interface F0/1** на каждом коммутаторе.
-##### S1
-```
-S1#sh int f0/1
-FastEthernet0/1 is up, line protocol is up (connected)
-Hardware is Lance, address is 0002.4aae.4a01 (bia 0002.4aae.4a01)
-BW 100000 Kbit, DLY 1000 usec,
-reliability 255/255, txload 1/255, rxload 1/255
-Encapsulation ARPA, loopback not set
-Keepalive set (10 sec)
-Full-duplex, 100Mb/s
-input flow-control is off, output flow-control is off
-ARP type: ARPA, ARP Timeout 04:00:00
-Last input 00:00:08, output 00:00:05, output hang never
-Last clearing of "show interface" counters never
-Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
-Queueing strategy: fifo
-Output queue :0/40 (size/max)
-5 minute input rate 0 bits/sec, 0 packets/sec
-5 minute output rate 0 bits/sec, 0 packets/sec
-956 packets input, 193351 bytes, 0 no buffer
-Received 956 broadcasts, 0 runts, 0 giants, 0 throttles
-0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
-0 watchdog, 0 multicast, 0 pause input
-0 input packets with dribble condition detected
-2357 packets output, 263570 bytes, 0 underruns
-0 output errors, 0 collisions, 10 interface resets
-0 babbles, 0 late collision, 0 deferred
-0 lost carrier, 0 no carrier
-0 output buffer failures, 0 output buffers swapped out
-```
-##### S2
-```
-S2#sh int f0/1
-FastEthernet0/1 is up, line protocol is up (connected)
-Hardware is Lance, address is 00d0.bc37.ad01 (bia 00d0.bc37.ad01)
-BW 100000 Kbit, DLY 1000 usec,
-reliability 255/255, txload 1/255, rxload 1/255
-Encapsulation ARPA, loopback not set
-Keepalive set (10 sec)
-Full-duplex, 100Mb/s
-input flow-control is off, output flow-control is off
-ARP type: ARPA, ARP Timeout 04:00:00
-Last input 00:00:08, output 00:00:05, output hang never
-Last clearing of "show interface" counters never
-Input queue: 0/75/0/0 (size/max/drops/flushes); Total output drops: 0
-Queueing strategy: fifo
-Output queue :0/40 (size/max)
-5 minute input rate 0 bits/sec, 0 packets/sec
-5 minute output rate 0 bits/sec, 0 packets/sec
-956 packets input, 193351 bytes, 0 no buffer
-Received 956 broadcasts, 0 runts, 0 giants, 0 throttles
-0 input errors, 0 CRC, 0 frame, 0 overrun, 0 ignored, 0 abort
-0 watchdog, 0 multicast, 0 pause input
-0 input packets with dribble condition detected
-2357 packets output, 263570 bytes, 0 underruns
-0 output errors, 0 collisions, 10 interface resets
-0 babbles, 0 late collision, 0 deferred
-0 lost carrier, 0 no carrier
-0 output buffer failures, 0 output buffers swapped out
-```
-
-#### Вопросы:
-Назовите адреса оборудования во второй строке выходных данных команды (или зашитый адрес — bia).
-
-МАС-адрес коммутатора S1 Fast Ethernet 0/1: **0002.4aae.4a01**
-
-МАС-адрес коммутатора S2 Fast Ethernet 0/1: **00d0.bc37.ad01**
-
-
-### Шаг 1.1.Просмотрите таблицу МАС-адресов коммутатора.
-Подключитесь к коммутатору S2 через консоль и просмотрите таблицу МАС-адресов до и после тестирования сетевой связи с помощью эхо-запросов.
-
-1.1.a.Подключитесь к коммутатору S2 через консоль и войдите в привилегированный режим EXEC.
-1.1.b.В привилегированном режиме EXEC введите команду **show mac address-table** и нажмите клавишу ввода.
-```
-S2#sh mac add
-Mac Address Table
--------------------------------------------
-
-Vlan Mac Address Type Ports
----- ----------- -------- -----
- 
-1 0002.4aae.4a01 DYNAMIC Fa0/1
-```
-Даже если сетевая коммуникация в сети не происходила (т. е. если команда ping не отправлялась), коммутатор может узнать МАС-адреса при подключении к ПК и другим коммутаторам.
-
-#### Вопросы:
-Записаны ли в таблице МАС-адресов какие-либо МАС-адреса?
-#### Ответ: В таблице записан MAC адрес
-Какие МАС-адреса записаны в таблице? С какими портами коммутатора они сопоставлены и каким устройствам принадлежат? Игнорируйте МАС-адреса, сопоставленные с центральным процессором.
-#### Ответ: В таблице записан MAC адрес подключенного к коммутатору ПК PC-B, в порт Fa0/1
-Если вы не записали МАС-адреса сетевых устройств в шаге 1, как можно определить, каким устройствам принадлежат МАС-адреса, используя только выходные данные команды **show mac address-table**? Работает ли это решение в любой ситуации?
-#### Ответ: Первые три шестнадцатиричных  значения в MAC адресе - код OUI поставщика, по ним можно приблизительно определить устройство, работает не всегда, например код OUI у маршрутизатора и коммутатора одного производителя будет совпадать.
-### Шаг 1.1.Очистите таблицу МАС-адресов коммутатора S2 и снова отобразите таблицу МАС-адресов.
-1.1.a.В привилегированном режиме EXEC введите команду **clear mac address-table dynamic** и нажмите клавишу **Enter**.
-1.1.b.Снова быстро введите команду **show mac address-table**.
-```
-S2#clear mac address-table dynamic
-S2#sh mac add
-Mac Address Table
--------------------------------------------
-
-Vlan Mac Address Type Ports
----- ----------- -------- -----
- 
-1 0002.4aae.4a01 DYNAMIC Fa0/1
-```
-#### Вопросы:
-Указаны ли в таблице МАС-адресов адреса для VLAN 1? Указаны ли другие МАС-адреса?
-#### Ответ: В таблице не указаны адреса для VLAN 1. Указан MAC адрес подключенного к коммутатору ПК
-Через 10 секунд введите команду **show mac address-table** и нажмите клавишу ввода. 
-```
-S2#sh mac add
-Mac Address Table
--------------------------------------------
-
-Vlan Mac Address Type Ports
----- ----------- -------- -----
- 
-1 0002.4aae.4a01 DYNAMIC Fa0/1
-```
-Появились ли в таблице МАС-адресов новые адреса?
-#### Ответ: Нет
-### Шаг 1.1.С компьютера PC-B отправьте эхо-запросы устройствам в сети и просмотрите таблицу МАС-адресов коммутатора.
-1.1.a.Из командной строки PC-B отправьте эхо-запросы на компьютер PC-A, а также коммутаторы S1 и S2.
+### Маршрутизатор
 
 ```
-C:\>ping 192.168.1.1
+R14#sh run
+Building configuration...
 
-Pinging 192.168.1.1 with 32 bytes of data:
+Current configuration : 1258 bytes
+!
+! Last configuration change at 09:28:17 UTC Sun Nov 23 2025
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R14
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$dVpI$aSCU3zmyuyn/FksMaM3kM0
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+redundancy
+!
+interface Loopback1
+ ip address 10.254.0.1 255.255.0.0
+!
+interface Ethernet0/0
+ description R12-0/2
+ ip address 172.16.0.2 255.255.255.252
+!
+interface Ethernet0/1
+ description R13-0/3
+ ip address 172.16.0.14 255.255.255.252
+!
+interface Ethernet0/2
+ description R22-0/0
+ ip address 172.16.0.26 255.255.255.252
+!
+interface Ethernet0/3
+ description R19-0/0
+ ip address 172.16.0.18 255.255.255.252
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
 
-Reply from 192.168.1.1: bytes=32 time<1ms TTL=128
-Reply from 192.168.1.1: bytes=32 time<1ms TTL=128
-Reply from 192.168.1.1: bytes=32 time<1ms TTL=128
-Reply from 192.168.1.1: bytes=32 time=2ms TTL=128
+control-plane
+!
+banner motd ^C
+Unauthorized access is strictly prohibited. ^C
+!
+line con 0
+ password 7 104D000A0618
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 05080F1C2243
+ login
+ transport input none
+!
+!
+end
 
-Ping statistics for 192.168.1.1:
-	Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),
-Approximate round trip times in milli-seconds:
-	Minimum = 0ms, Maximum = 2ms, Average = 0ms
-
-C:\>ping 192.168.1.11
-
-Pinging 192.168.1.11 with 32 bytes of data:
-
-Request timed out.
-Reply from 192.168.1.11: bytes=32 time<1ms TTL=255
-Reply from 192.168.1.11: bytes=32 time<1ms TTL=255
-Reply from 192.168.1.11: bytes=32 time<1ms TTL=255
-
-Ping statistics for 192.168.1.11:
-	Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
-Approximate round trip times in milli-seconds:
-	Minimum = 0ms, Maximum = 0ms, Average = 0ms
-
-C:\>ping 192.168.1.12
-
-Pinging 192.168.1.12 with 32 bytes of data:
-
-Request timed out.
-Reply from 192.168.1.12: bytes=32 time<1ms TTL=255
-Reply from 192.168.1.12: bytes=32 time<1ms TTL=255
-Reply from 192.168.1.12: bytes=32 time<1ms TTL=255
-
-Ping statistics for 192.168.1.12:
-	Packets: Sent = 4, Received = 3, Lost = 1 (25% loss),
-Approximate round trip times in milli-seconds:
-	Minimum = 0ms, Maximum = 0ms, Average = 0ms
 ```
-1.1.a.На компьютере PC-B откройте командную строку и еще раз введите команду **arp -a**.
-```
-C:\>arp -a
-Internet Address Physical Address Type
-192.168.1.1 00e0.8f6a.61ae dynamic
-192.168.1.11 0001.43ca.49d5 dynamic
-192.168.1.12 0090.2b94.a680 dynamic
-```
-#### Вопрос:
-Не считая адресов многоадресной и широковещательной рассылки, сколько пар IP- и МАС-адресов устройств было получено через протокол ARP?
-#### Ответ: Получено три пары
 
-#### Вопрос:
-От всех ли устройств получены ответы? Если нет, проверьте кабели и IP-конфигурации.
-#### Ответ: Получены ответы от всех устройств
+### Маршрутизатор Чокурдах
 
-1.1.a.Подключившись через консоль к коммутатору S2, введите команду **show mac address-table**.
 ```
-S2#sh mac add
-Mac Address Table
--------------------------------------------
+R28#sh run
+Building configuration...
 
-Vlan Mac Address Type Ports
----- ----------- -------- -----
+Current configuration : 1602 bytes
+!
+! Last configuration change at 11:02:58 UTC Sun Nov 23 2025
+!
+version 15.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R28
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$/0TT$7FdKbNoS0cIEFx6HrGuJ60
+!
+no aaa new-model
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+no ip domain lookup
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+redundancy
+!
+interface Loopback1
+ ip address 10.254.5.1 255.255.0.0
+!
+interface Ethernet0/0
+ description R26-0/1
+ ip address 172.16.0.70 255.255.255.252
+!
+interface Ethernet0/1
+ description R25-0/3
+ ip address 172.16.0.66 255.255.255.252
+!
+interface Ethernet0/2
+ no ip address
+ shutdown
+!
+interface Ethernet0/2.2
+ description Management
+ encapsulation dot1Q 2
+ ip address 10.5.0.254 255.255.255.0
+!
+interface Ethernet0/2.3
+ description Computers
+ encapsulation dot1Q 3
+ ip address 10.5.1.254 255.255.255.0
+!
+interface Ethernet0/3
+ no ip address
+ shutdown
+!
+interface Ethernet1/0
+ no ip address
+ shutdown
+!
+interface Ethernet1/1
+ no ip address
+ shutdown
+!
+interface Ethernet1/2
+ no ip address
+ shutdown
+!
+interface Ethernet1/3
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+control-plane
+!
+banner motd ^C
+Unauthorized access is strictly prohibited. ^C
+!
+line con 0
+ password 7 13061E010803
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 060506324F41
+ login
+ transport input none
+!
+!
+end
+```
 
-1 0001.43ca.49d5 DYNAMIC Fa0/1
-1 0001.63be.6e9a DYNAMIC Fa0/18
-1 0002.4aae.4a01 DYNAMIC Fa0/1
-1 00e0.8f6a.61ae DYNAMIC Fa0/1
-```
-#### Вопрос:
-Добавил ли коммутатор в таблицу МАС-адресов дополнительные МАС-адреса? Если да, то какие адреса и устройства?
-#### Ответ: Коммутатор добавил в таблицу МАС-адресов, адреса:
-#### 0001.43ca.49d5 - S1 VLAN1
-#### 0001.63be.6e9a - PC-B
-#### 0002.4aae.4a01 - S1 Fa0/1
-#### 00e0.8f6a.61ae - PC-A
-На компьютере PC-B откройте командную строку и еще раз введите команду **arp -a**.
-```
-C:\>arp -a
-Internet Address Physical Address Type
-192.168.1.1 00e0.8f6a.61ae dynamic
-192.168.1.11 0001.43ca.49d5 dynamic
-192.168.1.12 0090.2b94.a680 dynamic
-```
-#### Вопрос:
-Появились ли в ARP-кэше компьютера PC-B дополнительные записи для всех сетевых устройств, которым были отправлены эхо-запросы?
-#### Ответ: Да, в ARP кэше появились записи для всех сетевых устройств, которым были отправлены эхо-запросы
 
-## Вопрос для повторения
-В сетях Ethernet данные передаются на устройства по соответствующим МАС-адресам. Для этого коммутаторы и компьютеры динамически создают ARP-кэш и таблицы МАС-адресов. Если компьютеров в сети немного, эта процедура выглядит достаточно простой. Какие сложности могут возникнуть в крупных сетях?
-#### Ответ: При переполнении таблицы MAC адресов коммутатор начнёт отправлять траффик на все порты, кроме того порта, с которого его получил, тем самым повышая нагрузку на сеть и замедляя её
+
+### L3/L3 коммутатор
+
+```
+SW4#sh run
+Building configuration...
+
+Current configuration : 2268 bytes
+!
+! Last configuration change at 08:49:47 UTC Sun Nov 23 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname SW4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$H.Dd$1gSPgP9ZB0v/MR5palY5e0
+!
+no aaa new-model
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+interface Loopback1
+ ip address 10.254.0.7 255.255.0.0
+!
+interface Port-channel1
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+!
+interface Ethernet0/0
+ description SW3-0/0
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+!
+interface Ethernet0/1
+ description SW2-0/1
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+!
+interface Ethernet0/2
+ description PortChannel1-SW5-e0/2
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface Ethernet0/3
+ description PortChannel1-SW5-e0/3
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+ channel-group 1 mode active
+!
+interface Ethernet1/0
+ description R12-0/0
+ no switchport
+ ip address 172.16.0.94 255.255.255.252
+ duplex auto
+!
+interface Ethernet1/1
+ description R13-0/1
+ no switchport
+ ip address 172.16.0.102 255.255.255.252
+ duplex auto
+!
+interface Ethernet1/2
+!
+interface Ethernet1/3
+!
+interface Vlan2
+ ip address 10.0.0.252 255.255.255.0
+ vrrp 2 ip 10.0.0.254
+ vrrp 2 priority 120
+!
+interface Vlan3
+ ip address 10.0.1.252 255.255.255.0
+ vrrp 3 ip 10.0.1.254
+ vrrp 3 priority 120
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+control-plane
+!
+banner motd ^C
+Unauthorized access is strictly prohibited. ^C
+!
+line con 0
+ password 7 104D000A0618
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 070C285F4D06
+ login
+!
+!
+end
+```
+
+### L2 коммутатор
+
+```
+SW3#sh run
+Building configuration...
+
+Current configuration : 1361 bytes
+!
+! Last configuration change at 07:33:11 UTC Sun Nov 23 2025
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+service compress-config
+!
+hostname SW3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$FC9Y$jrBskz8dc3ZDSFBJ75/aU1
+!
+no aaa new-model
+!
+no ip domain-lookup
+ip cef
+no ipv6 cef
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+interface Ethernet0/0
+ description SW4-0/0
+ switchport trunk allowed vlan 2,3
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 990
+ switchport mode trunk
+!
+interface Ethernet0/1
+!
+interface Ethernet0/2
+ description VLAN3
+ switchport access vlan 3
+ switchport mode access
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+!
+interface Ethernet0/3
+!
+interface Ethernet1/0
+!
+interface Ethernet1/1
+!
+interface Ethernet1/2
+!
+interface Ethernet1/3
+!
+interface Vlan2
+ ip address 10.0.0.249 255.255.255.0
+ shutdown
+!
+ip default-gateway 10.0.0.254
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+control-plane
+!
+banner motd ^C
+Unauthorized access is strictly prohibited. ^C
+!
+line con 0
+ password 7 110A1016141D
+ logging synchronous
+ login
+line aux 0
+line vty 0 4
+ password 7 060506324F41
+ login
+!
+!
+end
+
+```
+
+

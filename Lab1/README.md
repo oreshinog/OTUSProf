@@ -1,5 +1,5 @@
 # Лабораторная работа. Проектирование сети
-[**Файл Cisco Packet Tracer**](https://github.com/oreshinog/OTUS/blob/main/Labs/Lab02/Pkt/lab02.pkt)
+[**Файл EVE-NG**](https://github.com/oreshinog/OTUSProf/blob/main/Lab1/EVE/otusprof_lab1.zip)
 # Топология
 ![Топология](https://github.com/oreshinog/OTUSProf/blob/main/Lab1/Img/Img00.png)
 

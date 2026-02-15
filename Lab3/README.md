@@ -1,4 +1,4 @@
-# Лабораторная работа. OSPF
+# Лабораторная работа. IS-IS
 [**Файл EVE-NG**](https://github.com/oreshinog/OTUSProf/blob/main/Lab3/EVE/otusprof_lab3.zip)
 # Топология
 ![Топология](https://github.com/oreshinog/OTUSProf/blob/main/Lab3/Img/Img00.png)

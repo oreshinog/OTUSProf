@@ -12,7 +12,6 @@
 R23 и R25 находятся в зоне 2222.
 R24 находится в зоне 24.
 R26 находится в зоне 26.
-Настройка осуществляется одновременно для IPv4 и IPv6.
 
 ## 1. R23 и R25
 
@@ -25,8 +24,6 @@ R23(config-router)#is-type level-2-only
 R23(config-router)#log-adjacency-changes
 R23(config-router)#exi
 R23(config)#int loop1
-R23(config-if)#ip router isis
-R23(config)#int e0/0
 R23(config-if)#ip router isis
 R23(config)#int e0/1
 R23(config-if)#ip router isis
@@ -45,13 +42,9 @@ R25(config-router)#log-adjacency-changes
 R25(config-router)#exi
 R25(config)#int loop1
 R25(config-if)#ip router isis
-R25(config)#int e0/0
-R25(config-if)#ip router isis
 R25(config)#int e0/1
 R25(config-if)#ip router isis
 R25(config)#int e0/2
-R25(config-if)#ip router isis
-R25(config)#int e0/3
 R25(config-if)#ip router isis
 ```
 
@@ -67,11 +60,7 @@ R24(config)#int loop1
 R24(config-if)#ip router isis
 R24(config)#int e0/0
 R24(config-if)#ip router isis
-R24(config)#int e0/1
-R24(config-if)#ip router isis
 R24(config)#int e0/2
-R24(config-if)#ip router isis
-R24(config)#int e0/3
 R24(config-if)#ip router isis
 ```
 
@@ -87,11 +76,7 @@ R26(config)#int loop1
 R26(config-if)#ip router isis
 R26(config)#int e0/0
 R26(config-if)#ip router isis
-R26(config)#int e0/1
-R26(config-if)#ip router isis
 R26(config)#int e0/2
-R26(config-if)#ip router isis
-R26(config)#int e0/3
 R26(config-if)#ip router isis
 ```
 

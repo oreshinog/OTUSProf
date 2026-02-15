@@ -41,61 +41,61 @@ R23(config-if)#ip router isis
 ### R25
 
 ```
-R23(config)#router isis
-R23(config-router)#net 49.2222.1025.4330.0000.00
-R23(config-router)#is-type level-2-only
-R23(config-router)#log-adjacency-changes
-R23(config-router)#exi
-R23(config)#int loop1
-R23(config-if)#ip router isis
-R23(config)#int e0/0
-R23(config-if)#ip router isis
-R23(config)#int e0/1
-R23(config-if)#ip router isis
-R23(config)#int e0/2
-R23(config-if)#ip router isis
-R23(config)#int e0/3
-R23(config-if)#ip router isis
+R25(config)#router isis
+R25(config-router)#net 49.2222.1025.4330.0000.00
+R25(config-router)#is-type level-2-only
+R25(config-router)#log-adjacency-changes
+R25(config-router)#exi
+R25(config)#int loop1
+R25(config-if)#ip router isis
+R25(config)#int e0/0
+R25(config-if)#ip router isis
+R25(config)#int e0/1
+R25(config-if)#ip router isis
+R25(config)#int e0/2
+R25(config-if)#ip router isis
+R25(config)#int e0/3
+R25(config-if)#ip router isis
 ```
 
 ### 2. R24
 
 ```
-R23(config)#router isis
-R23(config-router)#net 49.0024.1025.4320.0000.00
-R23(config-router)#is-type level-2-only
-R23(config-router)#log-adjacency-changes
-R23(config-router)#exi
-R23(config)#int loop1
-R23(config-if)#ip router isis
-R23(config)#int e0/0
-R23(config-if)#ip router isis
-R23(config)#int e0/1
-R23(config-if)#ip router isis
-R23(config)#int e0/2
-R23(config-if)#ip router isis
-R23(config)#int e0/3
-R23(config-if)#ip router isis
+R24(config)#router isis
+R24(config-router)#net 49.0024.1025.4320.0000.00
+R24(config-router)#is-type level-2-only
+R24(config-router)#log-adjacency-changes
+R24(config-router)#exi
+R24(config)#int loop1
+R24(config-if)#ip router isis
+R24(config)#int e0/0
+R24(config-if)#ip router isis
+R24(config)#int e0/1
+R24(config-if)#ip router isis
+R24(config)#int e0/2
+R24(config-if)#ip router isis
+R24(config)#int e0/3
+R24(config-if)#ip router isis
 ```
 
 ### 3. R26
 
 ```
-R23(config)#router isis
-R23(config-router)#net 49.0026.1025.4340.0000.00
-R23(config-router)#is-type level-2-only
-R23(config-router)#log-adjacency-changes
-R23(config-router)#exi
-R23(config)#int loop1
-R23(config-if)#ip router isis
-R23(config)#int e0/0
-R23(config-if)#ip router isis
-R23(config)#int e0/1
-R23(config-if)#ip router isis
-R23(config)#int e0/2
-R23(config-if)#ip router isis
-R23(config)#int e0/3
-R23(config-if)#ip router isis
+R26(config)#router isis
+R26(config-router)#net 49.0026.1025.4340.0000.00
+R26(config-router)#is-type level-2-only
+R26(config-router)#log-adjacency-changes
+R26(config-router)#exi
+R26(config)#int loop1
+R26(config-if)#ip router isis
+R26(config)#int e0/0
+R26(config-if)#ip router isis
+R26(config)#int e0/1
+R26(config-if)#ip router isis
+R26(config)#int e0/2
+R26(config-if)#ip router isis
+R26(config)#int e0/3
+R26(config-if)#ip router isis
 ```
 
 ## Итог
